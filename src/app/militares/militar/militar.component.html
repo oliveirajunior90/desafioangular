@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Serviço Obrigatório</th>
+          <th>Identidade</th>
+          <th>Nome</th>
+          <th>Nascimento</th>
+          <th>Patente</th>
+          <td>Editar</td>
+          <td>Excluir</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let militar of militares; let i = index">
+          <td>{{militar.id}}</td>
+          <td><p *ngIf="militar.servicoObrigatorio === 0">Não</p><p *ngIf="militar.servicoObrigatorio === 1">Sim</p></td>
+          <td>{{militar.identidade}}</td>
+          <td>{{militar.nome}}</td>
+          <td>{{militar.nascimento}}</td>
+          <td>{{militar.patente}}</td>
+          <td><a [routerLink]="['/militar/editar', militar.id]"><i class="glyphicon glyphicon-edit"></i></a></td>
+          <td><a (click)="delete(militar.id, i)"><i class="glyphicon glyphicon-floppy-remove"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <a [routerLink]="['/militar/novo']" class="btn btn-primary btn-sm pull-right"><i class="glyphicon glyphicon-plus"></i> Adicionar Militar</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<form [formGroup]="militarForm" (ngSubmit)="onSubmit()" novalidate class="form-modelo-admin">
+    <div class="form-group">
+        <label>Nome</label>
+        <input type="text" formControlName="nome"  class="form-control" placeholder="Enter text" (input)="this.changeStatus()">
+        <app-form-mostrar-erro 
+            [mostrarErro]="isFieldValid('nome')"
+            msgErro="Preencha o campo nome com o formato adequado">
+        </app-form-mostrar-erro>
+    </div>
+
+    <div class="form-group">
+        <label>Identidade</label>
+        <input type="text" formControlName="identidade" class="form-control" placeholder="Enter text" (input)="this.changeStatus()">
+        <app-form-mostrar-erro 
+            [mostrarErro]="isFieldValid('identidade')"
+            msgErro="Preencha o campo identidade com o formato adequado">
+        </app-form-mostrar-erro>
+    </div>
+
+    <div class="form-group">
+        <label>Nascimento</label>
+        <input type="text" formControlName="nascimento"  class="form-control"  placeholder="00/00/0000" (input)="this.changeStatus()">
+        <app-form-mostrar-erro 
+            [mostrarErro]="isFieldValid('nascimento')"
+            msgErro="Preencha o campo nascimento com o formato adequado">
+        </app-form-mostrar-erro>
+    </div>
+
+    <div class="form-group">
+        <label>Serviço Obrigatório</label>
+        <input type="checkbox" formControlName="servicoObrigatorio" [(ngModel)]="servicoObrigatorio" [checked]="militar.servicoObrigatorio === 1" [value]="1" (change)="saveUsername = !saveUsername" (input)="this.changeStatus()"/>
+        <!--
+        <select formControlName="servicoObrigatorio"  class="form-control" placeholder="Patente" (input)="this.selectedObrigatorio(value)" (input)="this.changeStatus()">
+            <option [selected]="militar.servicoObrigatorio === 0" [value]="0">Não</option>
+            <option [selected]="militar.servicoObrigatorio === 1" [value]="1">Sim</option>
+        </select>
+        -->
+    </div>
+
+    <div class="form-group">
+        <label>Patente</label>
+        <select formControlName="patente"  class="form-control" placeholder="Patente" (input)="this.changeStatus()">
+            <option *ngFor="let patente of ['Soldado', 'Cabo', 'Sargento']" [selected]="patente === militar.patente" [value]="patente">{{patente}}</option> 
+            <option *ngFor="let patente of ['Subtenente', 'Tenente', 'Capitão', 'General']" [hidden]="servicoObrigatorio" [selected]="patente === militar.patente" [value]="patente">{{patente}}</option>
+        </select>
+        <app-form-mostrar-erro 
+            [mostrarErro]="isFieldValid('patente')"
+            msgErro="Preencha o campo patente com o formato adequado">
+        </app-form-mostrar-erro>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a [routerLink]="['/']" class="btn btn-default pull-right" role="button" aria-pressed="true">Voltar</a>
+    </div>
+    
+    
+</form>
